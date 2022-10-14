@@ -1,17 +1,13 @@
 import pytest
 from selenium.webdriver.support import expected_conditions as EC
-from time import sleep
 from selenium.webdriver.support.wait import WebDriverWait
+
+from selenium.common.exceptions import StaleElementReferenceException, ElementClickInterceptedException,\
+                                       NoSuchElementException
 
 
 class BaseCase:
     driver = None
-    name = 'tmlnv@vk.com'
-    password = 'qwerty1234'
-    wrong_name = "арбуз"
-    wrong_password = "re-l-124C41+"
-    full_name = "Jay Gatsby"
-    profile_url = "https://target-sandbox.my.com/profile/contacts"
 
     @pytest.fixture(scope='function', autouse=True)
     def setup(self, driver):
@@ -40,17 +36,23 @@ class BaseCase:
         button = self.find(*locator3)
         button.click()
 
-    def click_logout(self, locator1, locator2):
-        sleep(3)
-        logout1 = self.find(*locator1)
+    def click_logout(self, locator1, locator2, locator3):
+        logout1 = self.delay_check(locator1)
         logout1.click()
-        sleep(3)
-        logout2 = self.find(*locator2)
-        logout2.click()
-        sleep(3)
+        click_retry = 0
+        while click_retry < 5:
+            try:
+                WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator3))
+                logout2 = self.delay_check(locator2)
+                WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator2))
+                logout2.click()
+                break
+            except (StaleElementReferenceException, NoSuchElementException, ElementClickInterceptedException):
+                click_retry += 1
+        WebDriverWait(self.driver, 10).until(EC.url_to_be("https://target-sandbox.my.com/"))
 
     def edit_contact_info(self, locator1, query, locator2):
-        self.driver.get(BaseCase.profile_url)
+        self.driver.get("https://target-sandbox.my.com/profile/contacts")
         self.delay_check(locator1)
         full_name = self.find(*locator1)
         full_name.clear()
