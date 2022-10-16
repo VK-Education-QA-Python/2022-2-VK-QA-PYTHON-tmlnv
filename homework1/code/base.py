@@ -36,7 +36,8 @@ class BaseCase:
         button = self.find(*locator3)
         button.click()
 
-    def click_logout(self, locator1, locator2, locator3):
+    def click_logout(self, locator1, locator2, locator3, locator4):
+        self.delay_check(locator4)
         logout1 = self.delay_check(locator1)
         logout1.click()
         click_retry = 0

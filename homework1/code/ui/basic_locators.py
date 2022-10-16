@@ -16,5 +16,6 @@ BILLING_BUTTON = (By.CSS_SELECTOR, "[href='/billing']")
 BILLING_PAYER = (By.CLASS_NAME, "deposit__payment-form__title")
 ERROR_INVALID_LOGIN_OR_PASSWORD = (By.CLASS_NAME, 'js_form_msg')
 LOGOUT_MENU = (By.CSS_SELECTOR, "[class*='rightMenu-module-visibleRightMenu']")
+DASHBOARD_INSTRUCTIONS = (By.CSS_SELECTOR, "[class*='instruction-module-title']")
 
 

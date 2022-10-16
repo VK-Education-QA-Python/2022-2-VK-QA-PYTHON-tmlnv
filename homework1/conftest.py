@@ -30,7 +30,8 @@ def driver(config):
                 options.add_argument('--headless')
                 options.add_argument('--disable-dev-shm-usage')
                 options.add_argument("window-size=1920,1080")
-            driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=options)
+            driver = webdriver.Chrome(executable_path=ChromeDriverManager(version='105.0.5195.19').install(),
+                                      options=options)
         case _:
             raise RuntimeError(f'Unsupported browser, we do this homework only for Chrome: "{browser}"')
 

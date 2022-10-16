@@ -20,7 +20,7 @@ class TestOne(BaseCase):
     def test_logout(self):
         self.login_common()
         self.click_logout(locator1=basic_locators.LOGOUT_BUTTON, locator2=basic_locators.LOGOUT_BUTTON_2,
-                          locator3=basic_locators.LOGOUT_MENU)
+                          locator3=basic_locators.LOGOUT_MENU, locator4=basic_locators.DASHBOARD_INSTRUCTIONS)
         assert self.delay_check(basic_locators.LOGIN_BUTTON)
 
     def test_login_negative_invalid_email(self):
