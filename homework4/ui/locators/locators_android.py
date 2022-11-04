@@ -15,8 +15,8 @@ class SearchPageANDROIDLocators(BasePageANDROIDLocators):
     SEND_BUTTON = (MobileBy.ID, 'ru.mail.search.electroscope:id/text_input_send')
     RUSSIA_INFO = (MobileBy.ID,
                    'ru.mail.search.electroscope:id/item_dialog_fact_card_content_text')
-    RUSSIAN_POPULATION = (MobileBy.XPATH, '//android.view.ViewGroup[4]/android.widget.TextView')
-    POPULATION_SEARCH_RESULT = (MobileBy.ID, 'ru.mail.search.electroscope:id/item_dialog_fact_card_title')
+    RUSSIAN_SIZE = (MobileBy.XPATH, '//android.view.ViewGroup[4]/android.widget.TextView')
+    SIZE_SEARCH_RESULT = (MobileBy.ID, 'ru.mail.search.electroscope:id/item_dialog_fact_card_title')
     CALCULATION_RESULT = (
         MobileBy.XPATH,
         '//androidx.recyclerview.widget.RecyclerView/android.widget.TextView[2]'

@@ -20,10 +20,10 @@ class SearchPage(BasePage):
     def hide_keyboard(self):
         pass
 
-    def tap_on_population_info(self):
+    def tap_on_size_info(self):
         pass
 
-    def population_info(self):
+    def size_info(self):
         pass
 
     def check_calculation_result(self):
@@ -60,12 +60,12 @@ class SearchPageANDROID(SearchPage):
         self.driver.hide_keyboard()
 
     @allure.step('Tapping on population info block.')
-    def tap_on_population_info(self):
-        self.click_for_android(self.locators.RUSSIAN_POPULATION)
+    def tap_on_size_info(self):
+        self.click_for_android(self.locators.RUSSIAN_SIZE)
 
     @allure.step("Population info block checking.")
-    def population_info(self):
-        text_population = self.find(self.locators.POPULATION_SEARCH_RESULT)
+    def size_info(self):
+        text_population = self.find(self.locators.SIZE_SEARCH_RESULT)
         return text_population.text
 
     @allure.step("Checking calculation result.")

@@ -9,7 +9,7 @@ from time import sleep
 class TestMarusyaAndroid(BaseCase):
 
     @allure.step("Testing Russian population search.")
-    def test_russian_population_search(self):
+    def test_size_of_russia_search(self):
         self.main_page.click_on_keyboard_button()
         self.search_page.enter_value_in_search_field('Russia')
         self.search_page.hide_keyboard()
@@ -18,10 +18,10 @@ class TestMarusyaAndroid(BaseCase):
         assert 'государство' in country_info
         sleep(3)
         self.search_page.swipe_to_population()
-        self.search_page.tap_on_population_info()
+        self.search_page.tap_on_size_info()
         sleep(3)
-        res = self.search_page.population_info()
-        assert '146 млн.' in res
+        res = self.search_page.size_info()
+        assert 'км' in res
 
     @allure.step("Testing calculator.")
     def test_calculator(self):
