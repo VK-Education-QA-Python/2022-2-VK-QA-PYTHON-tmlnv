@@ -59,10 +59,3 @@ class MysqlBuilder:
         for i in range(len(ips)):
             arg = Task5Model(ip=f'{ips[i]}', number_of_requests=vals[i])
             self.client.session.add(arg)
-
-    # def prepare_tables(self):
-    #     self.create_task1()
-    #     self.create_task2()
-    #     self.create_task3()
-    #     self.create_task4()
-    #     self.create_task5()

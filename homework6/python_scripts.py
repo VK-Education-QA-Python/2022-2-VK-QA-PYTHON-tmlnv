@@ -1,3 +1,4 @@
+import os
 import re
 from collections import Counter
 import heapq
@@ -6,7 +7,9 @@ from operator import itemgetter
 
 
 class AnalyzeScript:
-    with open('access.log', 'r') as file:
+    FILE_PATH_LOG = os.path.abspath(os.path.join(os.path.dirname(__file__), './access.log'))
+
+    with open(FILE_PATH_LOG, 'r') as file:
         data = file.readlines()
 
     def solve_task1(self):
@@ -31,7 +34,7 @@ class AnalyzeScript:
         return task2
 
     def solve_task3(self):
-        with open("access.log", "r") as f:
+        with open(self.FILE_PATH_LOG, "r") as f:
             counter = Counter(''.join(line.split()[6]) for line in f)
 
         task3 = dict()
@@ -41,7 +44,7 @@ class AnalyzeScript:
 
     def solve_task4(self):
         access = defaultdict()
-        with open("access.log", "r") as f:
+        with open(self.FILE_PATH_LOG, "r") as f:
             for line in f:
                 parts = line.split()
                 if re.search('4[0-9][0-9]', parts[8]):
@@ -55,7 +58,7 @@ class AnalyzeScript:
 
     def solve_task5(self):
         access = defaultdict(int)
-        with open("access.log", "r") as f:
+        with open(self.FILE_PATH_LOG, "r") as f:
             for line in f:
                 parts = line.split()
                 if re.search('5[0-9][0-9]', parts[8]):
