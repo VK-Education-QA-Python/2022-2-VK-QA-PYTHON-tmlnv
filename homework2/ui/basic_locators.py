@@ -19,7 +19,6 @@ class BasePageLocators:
     AUDIENCE_SEGMENTS = (By.CLASS_NAME, "left-nav__group__label")
     BILLING_BUTTON = (By.CSS_SELECTOR, "[href='/billing']")
     BILLING_PAYER = (By.CLASS_NAME, "deposit__payment-form__title")
-    CREATE_CAMPAIGN_BUTTON = (By.CSS_SELECTOR, "[data-test='button']:first-child")
 
 
 class CampaignPageLocators:
@@ -49,6 +48,7 @@ class CampaignPageLocators:
     CHECKBOX_ALL_ROWS = (By.CSS_SELECTOR, "[class*='header-module-noWrap'] [type='checkbox']")
     ACTIONS_DROP_DOWN = (By.CSS_SELECTOR, "[class*='tableControls-module-selectItem']")
     DELETE_BUTTON = (By.CSS_SELECTOR, "li[title='Delete']")
+    CREATE_CAMPAIGN_BUTTON = (By.CSS_SELECTOR, "[data-test='button']:first-child")
 
 
 class AudiencesPageLocators:

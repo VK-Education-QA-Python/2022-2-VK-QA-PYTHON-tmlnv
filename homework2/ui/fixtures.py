@@ -9,7 +9,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 
 from ui.basic_locators import LoginPageLocators
-from ui.pages.base_page import BasePage
 from ui.pages.login_page import LoginPage
 from ui.pages.campaigns_page import CampaignsPage
 from ui.pages.audiences_page import AudiencesPage
@@ -56,12 +55,13 @@ def driver(config, temp_dir):
             options=options,
             desired_capabilities=capabilities
         )
+
     elif browser == 'chrome':
         if headless:
             options.add_argument('--headless')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument("window-size=1920,1080")
-        driver = webdriver.Chrome(executable_path=ChromeDriverManager(version='105.0.5195.19').install(),
+        driver = webdriver.Chrome(executable_path=ChromeDriverManager(version='107.0.5304.62').install(),
                                   options=options)
     elif browser == 'firefox':
         driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
@@ -96,7 +96,7 @@ def get_driver(browser_name, headless, selenoid, vnc):
             options.add_argument('--headless')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument("window-size=1920,1080")
-        browser = webdriver.Chrome(executable_path=ChromeDriverManager(version='105.0.5195.19').install(),
+        browser = webdriver.Chrome(executable_path=ChromeDriverManager(version='107.0.5304.62').install(),
                                    options=options)
     elif browser_name == 'firefox':
         browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
@@ -132,11 +132,6 @@ def cookies(request, email=NAME, password=PASSWORD):
     cookies = driver_cookies.get_cookies()
 
     return cookies
-
-
-@pytest.fixture()
-def base_page(driver):
-    return BasePage(driver=driver)
 
 
 @pytest.fixture()

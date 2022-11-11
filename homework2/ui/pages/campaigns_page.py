@@ -1,8 +1,15 @@
 import allure
 from ui.pages.base_page import BasePage
+from ui.basic_locators import CampaignPageLocators
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import os
 
 
 class CampaignsPage(BasePage):
+    FILE_PATH_BIG = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../files/srvvr_cover.png'))
+    FILE_PATH_SMALL = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../files/srvvr_logo_cut.jpeg'))
+
     @allure.step("Choosing VK Product")
     def vk_products_button_click(self, locator):
         vk_products_button = self.delay_check(locator)
@@ -80,11 +87,47 @@ class CampaignsPage(BasePage):
         return created_company
 
     @allure.step("Deleting created campaign")
-    def delete_campaign(self, locator1, locator2, locator3):
-        checkbox_to_delete = self.delay_check(locator1)
+    def delete_campaign(self, locator_checkbox, locator_drop_down, locator_delete):
+        checkbox_to_delete = self.delay_check(locator_checkbox)
         checkbox_to_delete.click()
-        dropdown_to_delete = self.delay_check(locator2)
+        dropdown_to_delete = self.delay_check(locator_drop_down)
         dropdown_to_delete.click()
-        delete_button = self.delay_check(locator3)
+        delete_button = self.delay_check(locator_delete)
         delete_button.click()
         self.driver.refresh()
+
+    @allure.step("Creating new campaign")
+    def create_new_campaign(self, locator):
+        create_button = self.delay_check(locator)
+        create_button.click()
+
+    def full_create_campaign(self):
+        self.create_new_campaign(locator=CampaignPageLocators.CREATE_CAMPAIGN_BUTTON)
+        self.vk_products_button_click(locator=CampaignPageLocators.VK_PRODUCTS_BUTTON)
+        self.link_input(locator=CampaignPageLocators.LINK_INPUT, link="https://vk.com/sr55r")
+        self.widescreen_block_campaign_choose(
+            locator=CampaignPageLocators.WIDESCREEN_BLOCK_CAMPAIGN_BUTTON)
+        self.write_campaign_name(locator=CampaignPageLocators.CAMPAIGN_NAME_FIRST_INPUT,
+                                 name="SRVVR CAMPAIGN")
+        self.set_start_date(locator=CampaignPageLocators.CAMPAIGN_DATE_FROM_INPUT, date="15.11.2022")
+        self.set_end_date(locator=CampaignPageLocators.CAMPAIGN_DATE_TO_INPUT, date="30.11.2022")
+        self.set_budget_per_day(locator=CampaignPageLocators.BUDGET_PER_DAY_INPUT, value="1000")
+        self.set_total_budget(locator=CampaignPageLocators.BUDGET_TOTAL_INPUT, value="100000")
+        self.set_add_title(locator=CampaignPageLocators.ADD_TITLE_INPUT, value="SRVVR")
+        self.set_add_text(locator=CampaignPageLocators.ADD_TEXT_INPUT, value="SUBSCRIBE")
+        self.upload_big_image(locator=CampaignPageLocators.UPLOAD_BIG_IMAGE_INPUT,
+                              file=self.FILE_PATH_BIG)
+        self.upload_small_image(locator=CampaignPageLocators.UPLOAD_SMALL_IMAGE_INPUT,
+                                file=self.FILE_PATH_SMALL)
+        self.create_campaign_footer_button(
+            locator=CampaignPageLocators.CREATE_CAMPAIGN_FOOTER_BUTTON)
+        WebDriverWait(self.driver, 40).until(EC.url_to_be("https://target-sandbox.my.com/dashboard#"))
+
+    def full_delete_campaign(self):
+        self.delete_campaign(locator_checkbox=CampaignPageLocators.CHECKBOX_ALL_ROWS,
+                             locator_drop_down=CampaignPageLocators.ACTIONS_DROP_DOWN,
+                             locator_delete=CampaignPageLocators.DELETE_BUTTON
+                             )
+
+    def company_created_checking(self):
+        return self.check_company_created(locator=CampaignPageLocators.CAMPAIGN_TITLE_IN_TABLE)

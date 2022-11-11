@@ -2,7 +2,6 @@ import os
 import allure
 import pytest
 from _pytest.fixtures import FixtureRequest
-from ui.pages.base_page import BasePage
 from ui.pages.login_page import LoginPage
 from ui.pages.campaigns_page import CampaignsPage
 from ui.pages.audiences_page import AudiencesPage
@@ -38,6 +37,5 @@ class BaseCase:
                 self.driver.add_cookie(cookie)
 
             self.driver.refresh()
-            self.base_page: BasePage = (request.getfixturevalue('base_page'))
             self.campaigns_page: CampaignsPage = (request.getfixturevalue('campaigns_page'))
             self.audiences_page: AudiencesPage = (request.getfixturevalue('audiences_page'))
