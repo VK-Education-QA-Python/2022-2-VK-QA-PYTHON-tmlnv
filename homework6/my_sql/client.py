@@ -31,7 +31,6 @@ class MysqlClient:
         self.execute_query(f'CREATE database {self.db_name}')
 
     def delete_db(self):
-        # self.connect(db_created=True)
         self.execute_query(f'DROP database IF EXISTS {self.db_name}')
 
     def create_table_task1(self):
