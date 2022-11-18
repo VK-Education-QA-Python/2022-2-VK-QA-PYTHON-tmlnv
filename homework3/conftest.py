@@ -1,17 +1,18 @@
 import logging
 import pytest
+import os
+import sys
+import shutil
 
 from api.client import ApiClient
-from fixtures import *
+
+
+NAME = 'tmlnv@vk.com'
+PASSWORD = 'qwerty1234'
 
 
 def pytest_addoption(parser):
-    parser.addoption("--browser", default="chrome")
-    parser.addoption('--url', default='https://target-sandbox.my.com/')
-    parser.addoption('--headless', action='store_true', help="Run driver in headless mode (no browser page visible).")
     parser.addoption('--debug_log', action='store_true')
-    parser.addoption('--selenoid', action='store_true')
-    parser.addoption('--vnc', action='store_true')
 
 
 @pytest.fixture(scope='session')
@@ -35,32 +36,6 @@ def temp_dir(request):
     test_dir = os.path.join(request.config.base_temp_dir, request._pyfuncitem.nodeid)
     os.makedirs(test_dir)
     return test_dir
-
-
-@pytest.fixture()
-def config(request):
-    browser = request.config.getoption("--browser")
-    headless = request.config.getoption("--headless")
-    url = request.config.getoption('--url')
-    debug_log = request.config.getoption('--debug_log')
-    if request.config.getoption('--selenoid'):
-        if request.config.getoption('--vnc'):
-            vnc = True
-        else:
-            vnc = False
-        selenoid = 'http://127.0.0.1:4444/wd/hub'
-    else:
-        selenoid = None
-        vnc = False
-
-    return {
-        'browser': browser,
-        'url': url,
-        'headless': headless,
-        'debug_log': debug_log,
-        'selenoid': selenoid,
-        'vnc': vnc,
-    }
 
 
 @pytest.fixture(scope='function')
