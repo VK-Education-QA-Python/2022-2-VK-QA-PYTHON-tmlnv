@@ -72,8 +72,16 @@ class ApiClient:
         id_of_vk_study_group = vk_study_group.json()['items'][0]['id']
         return id_of_vk_study_group
 
-    @allure.step("Deleting source from sources list.")
-    def delete_source(self, source_id):
+    @allure.step("Deleting source poker from sources list.")
+    def delete_source_poker(self, source_id):
+        deleted_source = self.session.delete(
+            url=f'https://target-sandbox.my.com/api/v2/remarketing/vk_apps/{source_id}.json',
+            headers=self.headers
+        )
+        return deleted_source
+
+    @allure.step("Deleting source VK group from sources list.")
+    def delete_source_vk_group(self, source_id):
         deleted_source = self.session.delete(
             url=f'https://target-sandbox.my.com/api/v2/remarketing/vk_groups/{source_id}.json',
             headers=self.headers

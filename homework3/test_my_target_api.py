@@ -55,7 +55,7 @@ class TestApi(ApiBase):
             jsn_data = json.loads(file.read())
         assert jsn_data['name'] in self.api_client.check_segment(id_new_created_segment_poker).values()
         self.api_client.delete_segment(id_new_created_segment_poker)
-        self.api_client.delete_source(id_of_poker_game_source)
+        self.api_client.delete_source_poker(id_of_poker_game_source)
 
     @allure.step("Testing creation of an audience segment based on VK Study group source.")
     def test_creation_of_audience_vk_study_group(self, file_path_vk_study_segment):
@@ -68,4 +68,4 @@ class TestApi(ApiBase):
             jsn_data = json.loads(file.read())
         assert jsn_data['name'] in self.api_client.check_segment(id_new_created_segment_vk_study).values()
         self.api_client.delete_segment(id_new_created_segment_vk_study)
-        self.api_client.delete_source(id_of_vk_group_source)
+        self.api_client.delete_source_vk_group(id_of_vk_group_source)
