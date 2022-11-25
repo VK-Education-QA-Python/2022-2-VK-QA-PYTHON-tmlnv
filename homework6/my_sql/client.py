@@ -33,25 +33,9 @@ class MysqlClient:
     def delete_db(self):
         self.execute_query(f'DROP database IF EXISTS {self.db_name}')
 
-    def create_table_task1(self):
-        if not sqlalchemy.inspect(self.engine).has_table('task1'):
-            Base.metadata.tables['task1'].create(self.engine)
-
-    def create_table_task2(self):
-        if not sqlalchemy.inspect(self.engine).has_table('task2'):
-            Base.metadata.tables['task2'].create(self.engine)
-
-    def create_table_task3(self):
-        if not sqlalchemy.inspect(self.engine).has_table('task3'):
-            Base.metadata.tables['task3'].create(self.engine)
-
-    def create_table_task4(self):
-        if not sqlalchemy.inspect(self.engine).has_table('task4'):
-            Base.metadata.tables['task4'].create(self.engine)
-
-    def create_table_task5(self):
-        if not sqlalchemy.inspect(self.engine).has_table('task5'):
-            Base.metadata.tables['task5'].create(self.engine)
+    def create_table_task(self, n):
+        if not sqlalchemy.inspect(self.engine).has_table(f'task{n}'):
+            Base.metadata.tables[f'task{n}'].create(self.engine)
 
     def execute_query(self, query, fetch=False):
         res = self.connection.execute(query)

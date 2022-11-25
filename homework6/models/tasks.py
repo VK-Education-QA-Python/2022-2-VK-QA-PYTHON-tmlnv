@@ -48,7 +48,7 @@ class Task4Model(Base):
     __table_arg__ = {'mysql_charset': 'utf8'}
 
     def __repr__(self):
-        return f'Task id={self.id}, ip={self.ip}, url={self.url}, status_code={self.status_code}, request_size={self.request_size}'
+        return f'Task id={self.id}, ip={self.ip}, url={self.url}, status_code={self.status_code}, request_size={self.request_size} '
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     ip = Column(VARCHAR(100), nullable=False)

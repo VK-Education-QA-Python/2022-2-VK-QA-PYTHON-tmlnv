@@ -33,16 +33,16 @@ class AnalyzeScript:
         }
         return task2
 
-    def solve_task3(self):
+    def solve_task3(self, number_of_most_to_display):
         with open(self.FILE_PATH_LOG, "r") as f:
             counter = Counter(''.join(line.split()[6]) for line in f)
 
         task3 = dict()
-        for url, count in counter.most_common(10):
+        for url, count in counter.most_common(number_of_most_to_display):
             task3[url] = count
         return task3
 
-    def solve_task4(self):
+    def solve_task4(self, number_of_most_to_display):
         access = defaultdict()
         with open(self.FILE_PATH_LOG, "r") as f:
             for line in f:
@@ -51,12 +51,12 @@ class AnalyzeScript:
                     access[line] = parts[9]
 
         task4 = dict()
-        k = 5
+        k = number_of_most_to_display
         for line, part in heapq.nlargest(k, access.items(), key=itemgetter(1)):
             task4[(line.split()[0], line.split()[6], line.split()[8])] = part
         return task4
 
-    def solve_task5(self):
+    def solve_task5(self, number_of_most_to_display):
         access = defaultdict(int)
         with open(self.FILE_PATH_LOG, "r") as f:
             for line in f:
@@ -65,7 +65,7 @@ class AnalyzeScript:
                     access[parts[0]] += 1
 
         task5 = dict()
-        k = 5
+        k = number_of_most_to_display
         for ip, count in heapq.nlargest(k, access.items(), key=itemgetter(1)):
             task5[ip] = count
         return task5

@@ -8,11 +8,10 @@ def pytest_configure(config):
         mysql_client.create_db()
     mysql_client.connect(db_created=True)
     if not hasattr(config, 'workerinput'):
-        mysql_client.create_table_task1()
-        mysql_client.create_table_task2()
-        mysql_client.create_table_task3()
-        mysql_client.create_table_task4()
-        mysql_client.create_table_task5()
+        n = 1
+        while n <= 5:
+            mysql_client.create_table_task(n)
+            n += 1
 
     config.mysql_client = mysql_client
 
