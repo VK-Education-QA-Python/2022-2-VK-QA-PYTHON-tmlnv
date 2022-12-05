@@ -51,8 +51,16 @@ def pytest_configure(config):
         env.update({'APP_HOST': server_settings_host, 'APP_PORT': server_settings_port})
         return env
 
-    if not hasattr(config, 'workerinput'):
+    def prepare_server(server, path, env_, host, port):
+        stderr, stdout = make_temp(server)
 
+        proc = subprocess.Popen(['python3', path],
+                                stderr=stderr, stdout=stdout, env=env_
+                                )
+        wait_ready(host, port)
+        return proc, stderr, stdout
+
+    if not hasattr(config, 'workerinput'):
         # fastapi app configuration
 
         app_path = os.path.join(repo_root, 'application', 'fastapi_app.py')
@@ -61,45 +69,31 @@ def pytest_configure(config):
         env.update({'STUB_HOST': settings.STUB_HOST, 'STUB_PORT': settings.STUB_PORT})
         env.update({'MOCK_HOST': settings.MOCK_HOST, 'MOCK_PORT': settings.MOCK_PORT})
 
-        app_stderr, app_stdout = make_temp('app')
-
-        app_proc = subprocess.Popen(['python3', app_path],
-                                    stderr=app_stderr, stdout=app_stdout, env=env
-                                    )
+        app_proc, app_stderr, app_stdout = prepare_server('app', app_path, env, settings.APP_HOST, settings.APP_PORT)
         config.app_proc = app_proc
         config.app_stderr = app_stderr
         config.app_stdout = app_stdout
-        wait_ready(settings.APP_HOST, settings.APP_PORT)
 
         # fastapi stub configuration
 
         stub_path = os.path.join(repo_root, 'stub', 'fastapi_stub.py')
 
         env = make_env(server_settings_host=settings.STUB_HOST, server_settings_port=settings.STUB_PORT)
-        stub_stderr, stub_stdout = make_temp('stub')
-
-        stub_proc = subprocess.Popen(['python3', stub_path],
-                                     stderr=stub_stderr, stdout=stub_stdout, env=env
-                                     )
+        stub_proc, stub_stderr, stub_stdout = prepare_server('stub', stub_path, env,
+                                                             settings.STUB_HOST, settings.STUB_PORT)
         config.stub_proc = stub_proc
         config.stub_stderr = stub_stderr
         config.stub_stdout = stub_stdout
-        wait_ready(settings.STUB_HOST, settings.STUB_PORT)
-
         # fastapi mock configuration
 
         mock_path = os.path.join(repo_root, 'mock', 'fastapi_mock.py')
 
         env = make_env(server_settings_host=settings.MOCK_HOST, server_settings_port=settings.MOCK_PORT)
-        mock_stderr, mock_stdout = make_temp('mock')
-
-        mock_proc = subprocess.Popen(['python3', mock_path],
-                                     stderr=mock_stderr, stdout=mock_stdout, env=env
-                                     )
+        mock_proc, mock_stderr, mock_stdout = prepare_server('mock', mock_path, env,
+                                                             settings.MOCK_HOST, settings.MOCK_PORT)
         config.mock_proc = mock_proc
         config.mock_stderr = mock_stderr
         config.mock_stdout = mock_stdout
-        wait_ready(settings.MOCK_HOST, settings.MOCK_PORT)
 
 
 def pytest_unconfigure(config):
