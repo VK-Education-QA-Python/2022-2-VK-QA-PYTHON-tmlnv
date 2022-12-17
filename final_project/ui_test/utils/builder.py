@@ -31,7 +31,7 @@ class Builder:
         fake_name = fake.name().split()[0]
         fake_surname = fake.name().split()[-1]
         fake_middle_name = 'middle'
-        fake_email = 'api' + fake.email()
+        fake_email = 'ui' + fake.email()
 
         return User(fake_username=fake_username, fake_password=fake_password, fake_name=fake_name,
                     fake_email=fake_email, fake_surname=fake_surname, fake_middle_name=fake_middle_name)
