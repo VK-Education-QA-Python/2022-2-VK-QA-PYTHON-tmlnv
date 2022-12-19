@@ -1,0 +1,6 @@
+USERNAME = 'admin!'
+PASSWORD = 'admin'
+NAME = 'admin'
+SURNAME = 'admin'
+USERNAME_ACCESS0 = 'set_access0'
+PASSWORD_ACCESS0 = 'set_access0'
